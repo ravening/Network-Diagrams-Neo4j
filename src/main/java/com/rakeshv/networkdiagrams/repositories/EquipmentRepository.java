@@ -6,4 +6,6 @@ import reactor.core.publisher.Mono;
 
 public interface EquipmentRepository extends ReactiveNeo4jRepository<Equipment, String> {
     Mono<Equipment> findByName(String name);
+
+    Mono<Equipment> findById(String identifier);
 }

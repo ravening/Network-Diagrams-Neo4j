@@ -16,3 +16,8 @@ docker run -it -d --publish=7474:7474 --publish=7687:7687 -e 'NEO4J_AUTH=neo4j/s
 ```
 http://localhost:7474/browser/
 ```
+
+## Build docker image
+```
+./mvnw spring-boot:build-image
+```
