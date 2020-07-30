@@ -15,7 +15,7 @@ import java.util.Optional;
 public class VlanService {
     private final VlanRepository vlanRepository;
 
-    public Optional<Vlan> findVlanByVlanId(int vlanId) {
+    public Mono<Vlan> findVlanByVlanId(int vlanId) {
         return vlanRepository.findByVlanId(vlanId);
     }
 
@@ -32,9 +32,8 @@ public class VlanService {
     }
 
     public Mono<Vlan> editVlan(Vlan vlan) {
-        Optional<Vlan> vlanOptional = vlanRepository.findByVlanId(vlan.getVlanId());
-        if (vlanOptional.isPresent()) {
-            Vlan savedVlan = vlanOptional.get();
+        Vlan savedVlan = vlanRepository.findByVlanId(vlan.getVlanId()).block();
+        if (savedVlan != null) {
             savedVlan.setLinks(vlan.getLinks());
             savedVlan.setVlanId(vlan.getVlanId());
             return vlanRepository.save(savedVlan);
@@ -43,9 +42,9 @@ public class VlanService {
     }
 
     public boolean deleteVlan(int vlanId) {
-        Optional<Vlan> vlanOptional = vlanRepository.findByVlanId(vlanId);
-        if (vlanOptional.isPresent()) {
-            vlanRepository.delete(vlanOptional.get());
+        Vlan vlan = vlanRepository.findByVlanId(vlanId).block();
+        if (vlan != null) {
+            vlanRepository.delete(vlan);
             return true;
         }
 

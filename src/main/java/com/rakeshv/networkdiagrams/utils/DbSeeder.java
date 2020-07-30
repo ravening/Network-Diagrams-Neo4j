@@ -14,7 +14,9 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import javax.annotation.PreDestroy;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,7 +31,7 @@ public class DbSeeder {
     private final InterfacesRepository interfacesRepository;
     private final VlanRepository vlanRepository;
 
-    @EventListener(ApplicationReadyEvent.class)
+//    @EventListener(ApplicationReadyEvent.class)
     public void saveEntries() {
         equipmentRepository.deleteAll().block();
         interfacesRepository.deleteAll().block();
@@ -47,8 +49,8 @@ public class DbSeeder {
                 .model("mx")
                 .type("router")
                 .equipmentId(4567L)
-                .equipmentSet(new HashSet<>())
-                .interfaces(new HashSet<>()).build();
+                .equipmentSet(new ArrayList<>())
+                .interfaces(new ArrayList<>()).build();
 
         Equipment node01 = Equipment.builder()
                 .name("node01")
@@ -56,8 +58,8 @@ public class DbSeeder {
                 .model("dell")
                 .type("hypervisor")
                 .equipmentId(1111L)
-                .equipmentSet(new HashSet<>())
-                .interfaces(new HashSet<>()).build();
+                .equipmentSet(new ArrayList<>())
+                .interfaces(new ArrayList<>()).build();
 
         Equipment node99 = Equipment.builder()
                 .name("node99")
@@ -65,8 +67,8 @@ public class DbSeeder {
                 .model("hp")
                 .type("hypervisor")
                 .equipmentId(2222L)
-                .equipmentSet(new HashSet<>())
-                .interfaces(new HashSet<>()).build();
+                .equipmentSet(new ArrayList<>())
+                .interfaces(new ArrayList<>()).build();
 
         Interfaces aristaEth0 = Interfaces.builder()
                 .name("eth0")
@@ -187,5 +189,12 @@ public class DbSeeder {
             juniper.addEquipment(node99);
             equipmentRepository.save(juniper).block();
         }
+    }
+
+    @PreDestroy
+    public void cleanup() {
+        log.info("=====deleteing alll=====");
+        equipmentRepository.deleteAll().block();
+        vlanRepository.deleteAll().subscribe();
     }
 }

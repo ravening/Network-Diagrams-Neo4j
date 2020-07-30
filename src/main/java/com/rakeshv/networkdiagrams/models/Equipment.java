@@ -12,7 +12,9 @@ import org.neo4j.springframework.data.core.schema.Property;
 import org.neo4j.springframework.data.core.schema.Relationship;
 import org.neo4j.springframework.data.core.support.UUIDStringGenerator;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Node("Equipment")
@@ -34,20 +36,20 @@ public class Equipment {
     private Long equipmentId;
 
     @Relationship(type = "CONNECTED_TO")
-    private Set<Equipment> equipmentSet;
+    private List<Equipment> equipmentSet;
 
-    private Set<Interfaces> interfaces;
+    private List<Interfaces> interfaces;
 
     public void addEquipment(Equipment equipment) {
         if (this.equipmentSet == null) {
-            this.equipmentSet = new HashSet<>();
+            this.equipmentSet = new ArrayList<>();
         }
         this.equipmentSet.add(equipment);
     }
 
     public void addInterfaces(Interfaces interfaces) {
         if (this.interfaces == null) {
-            this.interfaces = new HashSet<>();
+            this.interfaces = new ArrayList<>();
         }
         this.interfaces.add(interfaces);
     }

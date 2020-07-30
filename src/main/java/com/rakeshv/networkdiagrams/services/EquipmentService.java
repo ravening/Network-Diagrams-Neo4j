@@ -1,6 +1,7 @@
 package com.rakeshv.networkdiagrams.services;
 
 import com.rakeshv.networkdiagrams.models.Equipment;
+import com.rakeshv.networkdiagrams.models.Interfaces;
 import com.rakeshv.networkdiagrams.repositories.EquipmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,10 @@ public class EquipmentService {
 
     public Mono<Equipment> getEquipmentByName(String equipmentName) {
         return equipmentRepository.findByName(equipmentName);
+    }
+
+    public Mono<Equipment> getEquipmentById(String id) {
+        return equipmentRepository.findById(id);
     }
 
     public Mono<Equipment> saveEquipment(Equipment equipment) {

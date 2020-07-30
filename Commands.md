@@ -11,3 +11,8 @@ MATCH p=(e:Equipment)-[r:INTERFACES]->() where e.Equipment="arista"  RETURN p LI
 
 ## Get connection details between any two devices
 MATCH p=(s:Equipment)-[r:CONNECTED_TO]-(d:Equipment) where s.name="node99" or d.name="node01"  RETURN p LIMIT 25
+
+MATCH p=(s:Equipment)-[:INTERFACES|:CONNECTED_TO]-() where s.name="node99" or s.name="netapp99" RETURN p LIMIT 50
+
+## Delete all nodes
+MATCH (n) DETACH DELETE n
