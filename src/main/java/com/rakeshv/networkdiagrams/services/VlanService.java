@@ -8,7 +8,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +20,10 @@ public class VlanService {
 
     public Flux<Vlan> getAllVlan() {
         return vlanRepository.findAll();
+    }
+
+    public Mono<Vlan> findVlanById(Long id) {
+        return vlanRepository.findById(id);
     }
 
     public Mono<Vlan> saveVlan(Vlan vlan) {

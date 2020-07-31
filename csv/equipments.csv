@@ -1,0 +1,7 @@
+name,ipaddress,model,version,type,equipmentid
+switch1,1.1.1.1,ARISTA,,SWITCH,1000
+switch2,2.2.2.2,JUNIPER,,ROUTER,2000
+switch3,3.3.3.3,CISCO,3.3,SWITCH,3000
+switch4,4.4.4.4,LEASEWB,4.4,ROUTER,4000
+node99,5.5.5.5,DELL,3.14,HYPERVISOR,5000
+netapp99,6.6.6.6,NETAPP,1.12,STORAGE,6000

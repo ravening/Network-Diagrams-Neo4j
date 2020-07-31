@@ -38,6 +38,7 @@ public class Equipment {
     @Relationship(type = "CONNECTED_TO")
     private List<Equipment> equipmentSet;
 
+    @Relationship(type = "PORT")
     private List<Interfaces> interfaces;
 
     public void addEquipment(Equipment equipment) {

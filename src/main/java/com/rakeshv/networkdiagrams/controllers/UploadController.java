@@ -83,7 +83,7 @@ public class UploadController {
                 model.addAttribute("status", true);
 
             } catch (Exception ex) {
-                model.addAttribute("message", "An error occurred while processing the CSV file.");
+                model.addAttribute("message", "An error occurred while processing the CSV file. " + ex.getMessage());
                 model.addAttribute("status", false);
             }
         }
@@ -148,7 +148,7 @@ public class UploadController {
                 model.addAttribute("status", status.isStatus());
 
             } catch (Exception ex) {
-                model.addAttribute("message", "An error occurred while processing the CSV file.");
+                model.addAttribute("message", "An error occurred while processing the CSV file. " + ex.getMessage());
                 model.addAttribute("status", false);
             }
         }
@@ -183,7 +183,7 @@ public class UploadController {
                 model.addAttribute("status", status.isStatus());
 
             } catch (Exception ex) {
-                model.addAttribute("message", "An error occurred while processing the CSV file.");
+                model.addAttribute("message", "An error occurred while processing the CSV file. " + ex.getMessage());
                 model.addAttribute("status", false);
             }
         }

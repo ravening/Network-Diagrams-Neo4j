@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -72,14 +71,12 @@ public class UploadService {
             equipmentMap.put(interfaceCsv.getEquipment(), equipment);
         }
 
-        List<Equipment> equipmentList = new ArrayList<>(equipmentMap.values());
         for (Equipment equipment : equipmentMap.values()) {
             log.info("interfaces for equipment {} are {}", equipment.getName(), equipment.getInterfaces());
             equipmentRepository.save(equipment).subscribe();
         }
         log.info("saving interfaces");
 
-//        equipmentRepository.saveAll(equipmentList).subscribe();
         return ExecutionStatus.builder().build();
     }
 
@@ -133,20 +130,17 @@ public class UploadService {
     }
 
     public ExecutionStatus saveVlans(List<VlanCsv> vlanCsvList) {
-        boolean success = true;
         StringBuilder stringBuilder = new StringBuilder();
         Map<String, Vlan> vlanMap = new HashMap<>();
         Map<String, Interfaces> interfacesMap = new HashMap<>();
         for (VlanCsv vlanCsv : vlanCsvList) {
-            log.info("Equipment is {}", vlanCsv.getEquipment());
             String[] interfaceList = vlanCsv.getInterfaces().split(",");
             String[] vlans = vlanCsv.getVlanId().split(",");
             for (String interfaceName : interfaceList) {
-                log.info("processing interface {}", interfaceName);
                 Interfaces interfaces;
                 Vlan vlan;
-                if (interfacesMap.containsKey(interfaceName)) {
-                    interfaces = interfacesMap.get(interfaceName);
+                if (interfacesMap.containsKey(vlanCsv.getEquipment() + interfaceName)) {
+                    interfaces = interfacesMap.get(vlanCsv.getEquipment() + interfaceName);
                 } else {
                     interfaces = interfacesRepository
                             .findByNameAndEquipment(interfaceName, vlanCsv.getEquipment()).block();
@@ -155,7 +149,6 @@ public class UploadService {
                     }
                 }
                 for (String v : vlans) {
-                    log.info("processiing vlan {}", v);
                     interfaces.addVlan(Integer.parseInt(v));
                     if (vlanMap.containsKey(v)) {
                         vlan = vlanMap.get(v);
@@ -169,24 +162,23 @@ public class UploadService {
                     vlan.setVlanId(Integer.parseInt(v));
                     vlan.addInterface(interfaces);
                     vlanMap.put(v, vlan);
-                    interfacesMap.put(interfaceName, interfaces);
+                    interfacesMap.put(vlanCsv.getEquipment() + interfaceName, interfaces);
                 }
             }
-
         }
 
         for (Interfaces interfaces : interfacesMap.values()) {
             log.info("saving interface {}" , interfaces);
-            interfacesRepository.save(interfaces).subscribe();
+            interfacesRepository.save(interfaces).block();
         }
         for (Vlan vlan : vlanMap.values()) {
             log.info("saving vlan {}", vlan);
-            vlanRepository.save(vlan).subscribe();
+            vlanRepository.save(vlan).block();
         }
 
         return ExecutionStatus.builder()
                 .message(stringBuilder.toString())
-                .status(success)
-                .httpStatus(success ? HttpStatus.OK : HttpStatus.NOT_FOUND).build();
+                .status(true)
+                .httpStatus(HttpStatus.OK).build();
     }
 }

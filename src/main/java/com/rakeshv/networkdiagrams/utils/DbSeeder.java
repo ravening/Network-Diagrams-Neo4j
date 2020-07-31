@@ -190,11 +190,4 @@ public class DbSeeder {
             equipmentRepository.save(juniper).block();
         }
     }
-
-    @PreDestroy
-    public void cleanup() {
-        log.info("=====deleteing alll=====");
-        equipmentRepository.deleteAll().block();
-        vlanRepository.deleteAll().subscribe();
-    }
 }
