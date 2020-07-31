@@ -49,9 +49,11 @@ Navigate to `http://localhost:7474/browser/` which gives you the neo4j ui.\
 Click on the database icon. Watch the below video to see how it looks when all connections are created.
 
 
+![Video](https://media.giphy.com/media/lrtW3W9bGnU3p2QykN/giphy.gif)
 
 ## REST api's
 
 
 There are several api's provided to manage the equipments, interfaces and vlans.\
 Head over to `http://localhost:8080/swagger-ui.html` to execute several end points.
+
