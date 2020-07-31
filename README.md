@@ -57,3 +57,4 @@ Click on the database icon. Watch the below video to see how it looks when all c
 There are several api's provided to manage the equipments, interfaces and vlans.\
 Head over to `http://localhost:8080/swagger-ui.html` to execute several end points.
 
+![here](https://github.com/ravening/Network-Diagrams-Neo4j/blob/master/csv/Screenshot%202020-07-31%20at%2017.00.28.png)
