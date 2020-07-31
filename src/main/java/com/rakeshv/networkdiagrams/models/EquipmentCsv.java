@@ -15,12 +15,20 @@ public class EquipmentCsv {
     private String name;
     @CsvBindByName(column = "ipaddress")
     private String ipAddress;
+    @CsvBindByName(column = "brand")
+    private String brand;
     @CsvBindByName(column = "model")
     private String model;
-    @CsvBindByName(column = "version")
-    private String version;
     @CsvBindByName(column = "type")
     private String type;
+    @CsvBindByName(column = "os")
+    private String os;
+    @CsvBindByName(column = "serialnumber")
+    private String serialNumber;
     @CsvBindByName(column = "equipmentid")
     private String equipmentId;
+    @CsvBindByName(column = "rackname")
+    private String rackName;
+    @CsvBindByName(column = "zone")
+    private String zone;
 }

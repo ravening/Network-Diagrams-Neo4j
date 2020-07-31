@@ -3,7 +3,9 @@ package com.rakeshv.networkdiagrams.services;
 import com.rakeshv.networkdiagrams.models.Equipment;
 import com.rakeshv.networkdiagrams.models.Interfaces;
 import com.rakeshv.networkdiagrams.repositories.EquipmentRepository;
+import com.rakeshv.networkdiagrams.repositories.InterfacesRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -30,6 +32,22 @@ public class EquipmentService {
 
     public Mono<Equipment> saveEquipment(Equipment equipment) {
         return equipmentRepository.save(equipment);
+    }
+
+    public Mono<Equipment> getEquipmentBySerial(String serial) {
+        return equipmentRepository.findBySerialNumber(serial);
+    }
+
+    public Mono<Equipment> getEquipmentByEquipmentId(Long equipmentId) {
+        return equipmentRepository.findByEquipmentId(equipmentId);
+    }
+
+    public Flux<Equipment> getAllEquipmentByBrand(String brand) {
+        return equipmentRepository.findByBrandEqualsIgnoreCase(brand);
+    }
+
+    public Flux<Equipment> getAllEquipmentByOs(String os) {
+        return equipmentRepository.findByOsEqualsIgnoreCase(os);
     }
 
     public Flux<Equipment> saveEquipments(List<Equipment> equipmentList) {

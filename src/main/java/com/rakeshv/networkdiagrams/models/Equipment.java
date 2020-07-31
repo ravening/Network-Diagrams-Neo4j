@@ -31,9 +31,14 @@ public class Equipment {
 //    @Property("Equipment")
     private String name;
     private String ipaddress;
+    private String brand;
     private String model;
     private String type;
+    private String os;
+    private String serialNumber;
     private Long equipmentId;
+    private String rackName;
+    private String zone;
 
     @Relationship(type = "CONNECTED_TO")
     private List<Equipment> equipmentSet;

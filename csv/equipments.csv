@@ -1,7 +1,7 @@
-name,ipaddress,model,version,type,equipmentid
-switch1,1.1.1.1,ARISTA,,SWITCH,1000
-switch2,2.2.2.2,JUNIPER,,ROUTER,2000
-switch3,3.3.3.3,CISCO,3.3,SWITCH,3000
-switch4,4.4.4.4,LEASEWB,4.4,ROUTER,4000
-node99,5.5.5.5,DELL,3.14,HYPERVISOR,5000
-netapp99,6.6.6.6,NETAPP,1.12,STORAGE,6000
+name,ipaddress,brand,model,type,os,serialnumber,equipmentid,rackname,zone
+switch1,1.1.1.1,ARISTA,fx,SWITCH,aos,1234,1000,5.1.0,europe
+switch2,2.2.2.2,JUNIPER,mx,ROUTER,junos,5678,2000,5.1.0,europe
+switch3,3.3.3.3,CISCO,catalyst,SWITCH,ios,9012,3000,5.2.0,asia
+switch4,4.4.4.4,HP,hpe,ROUTER,hpos,3456,4000,6.1.0,asia
+node99,5.5.5.5,DELL,r360,HYPERVISOR,dellos,7890,5000,6.2.0,america
+netapp99,6.6.6.6,NETAPP,ontap,STORAGE,netappos,0123,6000,7.1.0,america

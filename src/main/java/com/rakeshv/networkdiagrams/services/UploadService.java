@@ -32,7 +32,7 @@ public class UploadService {
     @Autowired
     InterfacesRepository interfacesRepository;
 
-    public void saveEquipments(List<EquipmentCsv> equipmentList) {
+    public ExecutionStatus saveEquipments(List<EquipmentCsv> equipmentList) {
         List<Equipment> equipmentArrayList = new ArrayList<>();
         for (EquipmentCsv equipmentCsv : equipmentList) {
             Equipment equipment = equipmentRepository.findByName(equipmentCsv.getName()).block(Duration.ofSeconds(2));
@@ -41,13 +41,22 @@ public class UploadService {
             }
             equipment.setName(equipmentCsv.getName());
             equipment.setIpaddress(equipmentCsv.getIpAddress());
+            equipment.setBrand(equipmentCsv.getBrand());
             equipment.setModel(equipmentCsv.getModel());
             equipment.setType(equipmentCsv.getType());
+            equipment.setOs(equipmentCsv.getOs());
+            equipment.setSerialNumber(equipmentCsv.getSerialNumber());
             equipment.setEquipmentId(Long.parseLong(equipmentCsv.getEquipmentId()));
+            equipment.setRackName(equipmentCsv.getRackName());
+            equipment.setZone(equipmentCsv.getZone());
             equipmentArrayList.add(equipment);
         }
         log.info("saving equipments");
         equipmentRepository.saveAll(equipmentArrayList).subscribe();
+        return ExecutionStatus.builder()
+                .message("")
+                .status(true)
+                .httpStatus(HttpStatus.OK).build();
     }
 
     public ExecutionStatus saveInterface(List<InterfaceCsv> interfaceList) {
@@ -77,7 +86,10 @@ public class UploadService {
         }
         log.info("saving interfaces");
 
-        return ExecutionStatus.builder().build();
+        return ExecutionStatus.builder()
+                .message("")
+                .status(true)
+                .httpStatus(HttpStatus.OK).build();
     }
 
     public ExecutionStatus saveConnections(List<ConnectionsCsv> connectionsList) {
