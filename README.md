@@ -58,3 +58,34 @@ There are several api's provided to manage the equipments, interfaces and vlans.
 Head over to `http://localhost:8080/swagger-ui.html` to execute several end points.
 
 ![here](https://github.com/ravening/Network-Diagrams-Neo4j/blob/master/csv/Screenshot%202020-07-31%20at%2017.00.28.png)
+
+
+## Exporting logs to Elasticsearch
+
+By default the logs will be stored in `/var/log/network-diagrams.log`. If you want the logs to be\
+exported to elasticsearch through logstash, you need to set the below setting to true in `application.properties`.
+
+```
+logging.logstash.enabled=false
+```
+
+Change the url and port of the host where logstash is running
+```
+logging.logstash.url=localhost:5000
+```
+
+** To start ELK stack in a docker follow the below steps **
+
+Get the `docker-compose.yml` from [here](https://github.com/ravening/dev_setup/blob/master/elasticsearch/docker-compose.yml) .\
+
+Create a file `logstash.yml` with the contents mentioned in above link.
+
+Start the elk stack using `docker-compose up -d`
+
+Once the containers are ready, start this application. This will create a new index in\
+elasticsearch with name `network-diagrams`
+
+
+## API docs
+
+Open api docs can be found in `http://localhost:8080/v2/api-docs`
