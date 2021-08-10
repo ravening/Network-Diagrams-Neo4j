@@ -1,0 +1,9 @@
+export const GET_EQUIPMENTS = 'getHeroes';
+export const ADD_HERO = 'addHero';
+export const UPDATE_HERO = 'updateHero';
+export const DELETE_HERO = 'deleteHero';
+export const GET_INTERFACES = 'getVillains';
+export const ADD_VILLAIN = 'addVillain';
+export const UPDATE_VILLAIN = 'updateVillain';
+export const DELETE_VILLAIN = 'deleteVillain';
+export const GET_VLANS = 'getVlans';
